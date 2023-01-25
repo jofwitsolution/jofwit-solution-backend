@@ -37,10 +37,10 @@ const userSchema = new mongoose.Schema(
         ref: 'Post',
       },
     ],
-    favCategories: [
+    tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'Tag',
       },
     ],
     profile: {

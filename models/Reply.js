@@ -8,21 +8,15 @@ const replySchema = new mongoose.Schema(
     },
     likes: [
       {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
-          required: true,
-        },
-        createdAt: {
-          type: Date,
-          default: Date.now,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
       },
     ],
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     comment: { type: mongoose.Schema.Types.ObjectId, ref: 'Comment' },
   },
-  { timestamps: true }
+  { timestamps: { createdAt: true, updatedAt: false } }
 );
 
 const Reply = mongoose.model('Reply', replySchema);

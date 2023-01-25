@@ -15,26 +15,20 @@ const postSchema = new mongoose.Schema(
       required: false,
       default: null,
     },
-    categories: [
+    tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'Tag',
       },
     ],
     likes: [
       {
-        user: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'User',
-          required: true,
-        },
-        createdAt: {
-          type: Date,
-          default: Date.now,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
       },
     ],
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 );
