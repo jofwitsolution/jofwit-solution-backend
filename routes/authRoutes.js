@@ -1,28 +1,28 @@
 const jwt = require('jsonwebtoken');
-const { passport } = require('../controllers/authController');
+const passport = require('../passport/passport');
+const {
+  googleAuthentication,
+  signupUser,
+  loginUser,
+} = require('../controllers/authController');
 const express = require('express');
 const router = express.Router();
 
+// email and password authentication
+router.post('/signup', signupUser);
+router.post('/login', loginUser);
+
+// google authentication
 router.get(
   '/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
+// google authentication
 router.get(
   '/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
-
-  function (req, res) {
-    const token = jwt.sign({ userId: req.user._id }, process.env.JWT_SECRET);
-
-    res.cookie('token', token, {
-      // expires: new Date(Date.now() + 900000), // expires after 900000milliseconds=15mins
-      httpOnly: true,
-      sameSite: true,
-      secure: true,
-    });
-    res.redirect(process.env.CLIENT_URL);
-  }
+  googleAuthentication
 );
 
 module.exports = router;

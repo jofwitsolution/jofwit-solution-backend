@@ -8,7 +8,7 @@ const rootRoute = require('./routes/root');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
-const { passport } = require('./controllers/authController');
+const passport = require('./passport/passport');
 
 const app = express();
 
@@ -54,6 +54,7 @@ app.use('/api/posts', postRoutes);
 app.use(errorHandler);
 app.use(notFound);
 
+// connect to mongodb
 mongodb();
 
 const port = process.env.PORT || 6001;
