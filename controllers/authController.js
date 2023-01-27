@@ -1,6 +1,10 @@
 const bcrypt = require('bcrypt');
 const { User } = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
+const {
+  validateUserLogin,
+  validateUserSignup,
+} = require('../validations/userValidation');
 
 // @desc Signup user with name, email and password
 // @route Post /api/auth/signup
@@ -10,12 +14,21 @@ const signupUser = async (req, res, next) => {
     let { firstName, lastName, email, password } = req.body;
 
     // Validation
+    const { error } = validateUserSignup({
+      firstName,
+      lastName,
+      email,
+      password,
+    });
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
 
     email = email.toLowerCase();
     // check if a user with the same email already exists
     const existingUser = await User.findOne({ email: email });
     if (existingUser) {
-      res.status(400).json({ message: 'User already exist' });
+      return res.status(400).json({ message: 'User already exist' });
     }
 
     const username = lastName.concat(Date.now());
@@ -67,12 +80,16 @@ const loginUser = async (req, res, next) => {
     let { email, password } = req.body;
 
     // Validation
+    const { error } = validateUserLogin({ email, password });
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
 
     email = email.toLowerCase();
     // Find user by email
     const user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ message: 'User not found' });
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
     // check if the password is correct
