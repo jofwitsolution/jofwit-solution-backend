@@ -30,7 +30,7 @@ passport.use(
         user = new User({
           googleId: profile.id,
           username: profile.name.familyName + Date.now(),
-          email: profile.emails[0].value,
+          googleEmail: profile.emails[0].value,
           profile: {
             firstName: profile.name.givenName,
             lastName: profile.name.familyName,

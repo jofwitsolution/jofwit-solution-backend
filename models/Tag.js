@@ -7,6 +7,11 @@ const tagSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    shorthand: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   { timestamps: { createdAt: true, updatedAt: false } }
 );

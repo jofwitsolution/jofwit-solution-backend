@@ -134,12 +134,14 @@ const googleAuthentication = (req, res) => {
       user.role
     );
 
-    res.cookie('token', token, {
+    const cookieOptions = {
       // expires: new Date(Date.now() + 900000), // expires after 900000milliseconds=15mins
       httpOnly: true,
       sameSite: true,
       secure: true,
-    });
+    };
+
+    res.cookie('token', token);
     res.redirect(process.env.CLIENT_URL);
   } catch (error) {
     next(error);

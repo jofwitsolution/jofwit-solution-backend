@@ -10,8 +10,8 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
-      unique: true,
+      required: false,
+      unique: false,
       maxLength: 50,
     },
     password: {
@@ -21,6 +21,11 @@ const userSchema = new mongoose.Schema(
       maxlength: 255,
     },
     googleId: {
+      type: String,
+      required: false,
+      unique: false,
+    },
+    googleEmail: {
       type: String,
       required: false,
       unique: false,
