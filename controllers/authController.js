@@ -143,8 +143,8 @@ const googleAuthentication = (req, res) => {
     };
 
     res.cookie('token', token, {
-      domain: '.vercel.app',
-      sameSite: true,
+      domain: 'jofwitsolution.vercel.app',
+      sameSite: 'None',
       secure: true,
       httpOnly: true,
     });
