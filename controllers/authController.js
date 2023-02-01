@@ -141,7 +141,9 @@ const googleAuthentication = (req, res) => {
       sameSite: 'None',
     };
 
-    res.cookie('token', token, cookieOptions);
+    res.cookie('token', token, {
+      sameSite: 'None',
+    });
     res.redirect(process.env.CLIENT_URL);
   } catch (error) {
     next(error);
