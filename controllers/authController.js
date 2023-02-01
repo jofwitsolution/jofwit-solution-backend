@@ -146,7 +146,6 @@ const googleAuthentication = (req, res) => {
       sameSite: 'None',
       secure: true,
       httpOnly: true,
-      domain: 'https://jofwitsolution.vercel.app/',
     });
     res.redirect(process.env.CLIENT_URL);
   } catch (error) {
