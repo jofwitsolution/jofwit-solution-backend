@@ -139,6 +139,7 @@ const googleAuthentication = (req, res) => {
     // httpOnly: true,
     const cookieOptions = {
       sameSite: 'None',
+      secure: true,
     };
 
     res.cookie('token', token, {
