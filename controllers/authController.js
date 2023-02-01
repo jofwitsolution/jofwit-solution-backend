@@ -143,6 +143,7 @@ const googleAuthentication = (req, res) => {
     };
 
     res.cookie('token', token, {
+      domain: '.vercel.app',
       sameSite: true,
       secure: true,
       httpOnly: true,
